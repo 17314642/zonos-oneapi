@@ -1,3 +1,11 @@
 #!/usr/bin/env bash
 
-watch -n1 "grep -rE \"drm-resident-\" /proc/\$(pidof python3)/fdinfo"
+while true; do
+    clear
+
+    for pid in $(pidof python3); do
+        grep -r drm-resident /proc/${pid}/fdinfo | grep -Pv ":\t0"
+    done
+
+    sleep 3
+done
